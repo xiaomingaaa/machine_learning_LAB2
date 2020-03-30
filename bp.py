@@ -1,7 +1,7 @@
 '''
 @Author: your name
 @Date: 2020-03-27 15:52:48
-@LastEditTime: 2020-03-30 18:41:34
+@LastEditTime: 2020-03-30 18:46:04
 @LastEditors: Please set LastEditors
 @Description: In User Settings Edit
 @FilePath: \LAB2\bp.py
@@ -163,6 +163,6 @@ if __name__ == "__main__":
     plt.plot(np.array(epoch_his), np.array(roc_history), label='roc_auc')
     plt.plot(np.array(epoch_his), np.array(recall_history), label='recall')
     plt.legend()
-    plt.savefig('metrics_{}_depth_lr{}_epoch{}_batch{}.png'.format(
+    plt.savefig('metrics_{}_depth{}_lr{}_epoch{}_batch{}.png'.format(
         data_name, depth, lr, epoch, batch_size))
     plt.show()
