@@ -1,7 +1,7 @@
 '''
 @Author: your name
 @Date: 2020-03-27 15:52:48
-@LastEditTime: 2020-03-30 18:39:11
+@LastEditTime: 2020-03-30 18:41:34
 @LastEditors: Please set LastEditors
 @Description: In User Settings Edit
 @FilePath: \LAB2\bp.py
@@ -20,10 +20,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
-def Relu(x):
-    x[x > 0] = x
-    x[x <= 0] = 0
-    return x
 
 
 def LoadMatFile(dataset='mnist'):
@@ -107,21 +103,22 @@ def eval(y_hat, y):
 
 if __name__ == "__main__":
     data_name = 'usps'  # usps, mnist
-    depth=2
-    epoch=20
-    lr=0.01
-    batch_size=32
-    test_size=0.2 #train: test = 8:2
+    depth = 2
+    epoch = 20
+    lr = 0.01
+    batch_size = 32
+    test_size = 0.2  # train: test = 8:2
     X, y = LoadMatFile(data_name)
     y, num_output = process_labels(y)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=test_size)
     X_train = torch.FloatTensor(X_train)
     X_test = torch.FloatTensor(X_test)
     y_train = torch.LongTensor(y_train)
     y_test = torch.LongTensor(y_test)
     dataset = TensorDataset(X_train, y_train)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-    net = Recognition(X_train.shape[1], num_output,depth=depth)
+    net = Recognition(X_train.shape[1], num_output, depth=depth)
     optimzer = optim.SGD(net.parameters(), lr=lr)
     loss_history = []
     epoch_his = []
@@ -130,7 +127,6 @@ if __name__ == "__main__":
     recall_history = []
     precision_history = []
     start = time.time()
-
 
     for i in range(epoch):
         epoch_his.append(i)
@@ -157,7 +153,8 @@ if __name__ == "__main__":
     print('total time: {}'.format(elapsed))
     plt.plot(np.array(epoch_his), np.array(loss_history), label='loss')
     plt.legend()
-    plt.savefig('loss_{}_depth{}_lr{}_epoch{}_batch{}.png'.format(data_name,depth,lr,epoch,batch_size))
+    plt.savefig('loss_{}_depth{}_lr{}_epoch{}_batch{}.png'.format(
+        data_name, depth, lr, epoch, batch_size))
     plt.show()
 
     plt.plot(np.array(epoch_his), np.array(acc_history), label='acc')
@@ -166,5 +163,6 @@ if __name__ == "__main__":
     plt.plot(np.array(epoch_his), np.array(roc_history), label='roc_auc')
     plt.plot(np.array(epoch_his), np.array(recall_history), label='recall')
     plt.legend()
-    plt.savefig('metrics_{}_depth_lr{}_epoch{}_batch{}.png'.format(data_name,depth,lr,epoch,batch_size))
+    plt.savefig('metrics_{}_depth_lr{}_epoch{}_batch{}.png'.format(
+        data_name, depth, lr, epoch, batch_size))
     plt.show()
