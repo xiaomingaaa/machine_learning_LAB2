@@ -1,0 +1,2 @@
+# machine_learning_LAB2
+机器学习课程中的实验二（使用mnist与usps数据集，采用BP神经网络与SVM支持向量机的方式实现手写数字的识别）

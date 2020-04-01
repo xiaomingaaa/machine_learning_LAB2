@@ -1,7 +1,7 @@
 '''
 @Author: your name
 @Date: 2020-03-27 15:52:48
-@LastEditTime: 2020-03-30 18:46:04
+@LastEditTime: 2020-03-31 10:23:50
 @LastEditors: Please set LastEditors
 @Description: In User Settings Edit
 @FilePath: \LAB2\bp.py
@@ -53,6 +53,7 @@ class Recognition(nn.Module):
         for i in range(self.depth-1):
             nets.append(self.linear)
             nets.append(self.relu)
+
         nets.append(self.final)
         return nets
 
